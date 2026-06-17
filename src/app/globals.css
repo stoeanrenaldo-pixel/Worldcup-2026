@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #FFD700;
+  --gold-dim: #C9A227;
+  --gold-glow: rgba(255, 215, 0, 0.15);
+  --surface-1: #0a0a0f;
+  --surface-2: #12121f;
+  --surface-3: #1a1a2e;
+  --surface-4: #242440;
+  --border: rgba(255, 215, 0, 0.1);
+  --border-bright: rgba(255, 215, 0, 0.3);
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface-2); }
+::-webkit-scrollbar-thumb { background: var(--surface-4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+/* Gold gradient text utility */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card styles */
+.card {
+  @apply bg-[#12121f] border border-[rgba(255,215,0,0.1)] rounded-xl p-4;
+}
+
+.card-hover {
+  @apply card transition-all duration-200 hover:border-[rgba(255,215,0,0.3)] hover:bg-[#1a1a2e] cursor-pointer;
+}
+
+/* Rank badge */
+.rank-up { @apply text-emerald-400; }
+.rank-down { @apply text-red-400; }
+.rank-same { @apply text-gray-500; }
+
+/* Points cell coloring (like Excel) */
+.pts-excellent { @apply bg-emerald-900/40 text-emerald-300; }
+.pts-good { @apply bg-blue-900/40 text-blue-300; }
+.pts-zero { @apply bg-transparent text-gray-600; }
+.pts-negative { @apply bg-red-900/40 text-red-400; }
+
+/* Score badge */
+.score-badge {
+  @apply inline-flex items-center gap-1 font-mono font-bold text-sm bg-[#242440] 
+         border border-[rgba(255,215,0,0.2)] rounded-lg px-3 py-1;
+}
+
+/* Team name */
+.team-flag {
+  @apply text-xl leading-none;
+}
+
+/* Animation */
+@keyframes gold-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+  50% { box-shadow: 0 0 20px 4px rgba(255, 215, 0, 0.15); }
+}
+
+.animate-gold-pulse {
+  animation: gold-pulse 2s ease-in-out infinite;
+}
+
+/* Leaderboard table */
+.leaderboard-table {
+  @apply w-full border-collapse;
+}
+
+.leaderboard-table th {
+  @apply text-xs font-medium text-[rgba(255,255,255,0.5)] uppercase tracking-wider
+         py-3 px-2 border-b border-[rgba(255,215,0,0.1)] whitespace-nowrap;
+}
+
+.leaderboard-table td {
+  @apply py-3 px-2 border-b border-[rgba(255,255,255,0.04)] text-sm whitespace-nowrap;
+}
+
+.leaderboard-table tr:hover td {
+  @apply bg-[rgba(255,215,0,0.04)];
+}
+
+/* Expert card */
+.expert-card {
+  @apply bg-[#1a1a2e] border border-[rgba(255,215,0,0.2)] rounded-xl p-4 
+         relative overflow-hidden;
+}
+
+.expert-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FFD700, transparent);
+}
+
+/* Progress bar */
+.progress-bar {
+  @apply h-2 bg-[#242440] rounded-full overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 
+         transition-all duration-700;
+}
+
+/* Mobile prediction card */
+.prediction-card {
+  @apply bg-[#12121f] border border-[rgba(255,255,255,0.06)] rounded-xl p-4 mb-3;
+}
+
+/* Admin panel */
+.admin-input {
+  @apply w-full bg-[#12121f] border border-[rgba(255,215,0,0.2)] rounded-lg px-4 py-2.5
+         text-white placeholder-[rgba(255,255,255,0.3)] focus:outline-none 
+         focus:border-[rgba(255,215,0,0.5)] transition-colors;
+}
+
+.admin-btn {
+  @apply inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm
+         transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-500/50;
+}
+
+.admin-btn-primary {
+  @apply admin-btn bg-yellow-500 text-black hover:bg-yellow-400;
+}
+
+.admin-btn-secondary {
+  @apply admin-btn bg-[#242440] text-white border border-[rgba(255,215,0,0.2)] 
+         hover:border-[rgba(255,215,0,0.4)];
+}
+
+.admin-btn-danger {
+  @apply admin-btn bg-red-900/50 text-red-300 border border-red-800/50 hover:bg-red-900;
+}
+
+/* Textarea for Facebook import */
+.facebook-import-textarea {
+  @apply w-full h-80 bg-[#0a0a0f] border border-[rgba(255,215,0,0.2)] rounded-xl p-4
+         text-white text-sm font-mono placeholder-[rgba(255,255,255,0.2)] 
+         focus:outline-none focus:border-[rgba(255,215,0,0.4)] resize-none;
+}
+
+/* Loading skeleton */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #12121f 25%, #1a1a2e 50%, #12121f 75%);
+  background-size: 2000px 100%;
+  animation: shimmer 2s infinite linear;
+}
